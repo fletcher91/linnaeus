@@ -11,13 +11,15 @@ class Linnaeus
       persistence_class: Persistence,
       stopwords_class: Stopwords,
       skip_stemming: false,
-      encoding: 'UTF-8'
+      encoding: 'UTF-8',
+      only_matched_words: false
     }.merge(opts)
 
     @db = options[:persistence_class].new(options)
     @stopword_generator = options[:stopwords_class].new
     @skip_stemming = options[:skip_stemming]
     @encoding = options[:encoding]
+    @only_matched_words = options[:only_matched_words]
   end
 
   # Count occurences of words in a text corpus.
