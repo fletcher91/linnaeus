@@ -59,7 +59,11 @@ class Linnaeus::Classifier < Linnaeus
   def classify(text)
     scores = classification_scores(text)
     if scores.any?
-      (scores.sort_by { |a| -a[1] })[0][0]
+      scores.delete_if { |key, value| value >= Float::MAX || value == 0 }
+      if scores.none?
+        scores = { unknown: 1 }
+      end
+        (scores.sort_by { |a| -a[1] })[0][0]
     else
       ''
     end
