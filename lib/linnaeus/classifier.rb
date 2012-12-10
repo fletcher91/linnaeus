@@ -41,7 +41,7 @@ class Linnaeus::Classifier < Linnaeus
 
       scores[category] = 0
       count_word_occurrences(text).each do |word, count|
-        tmp_score = (words_with_count_for_category[word].nil?) ? 0.1 : words_with_count_for_category[word].to_i
+        tmp_score = (words_with_count_for_category[word].nil?) ? 0.000045 : words_with_count_for_category[word].to_i
         scores[category] += Math.log(tmp_score / total_word_count_sum_for_category.to_f)
       end
     end
@@ -59,11 +59,11 @@ class Linnaeus::Classifier < Linnaeus
   def classify(text)
     scores = classification_scores(text)
     if scores.any?
-      scores.delete_if { |key, value| value >= Float::MAX || value == 0 }
+      scores.delete_if { |key, value| value >= Float::MAX || value == 0 || value < -10*count_word_occurrences(text).length }
       if scores.none?
         scores = { unknown: 1 }
       end
-        (scores.sort_by { |a| -a[1] })[0][0]
+      (scores.sort_by { |a| -a[1] })[0][0]
     else
       ''
     end
