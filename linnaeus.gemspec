@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "linnaeus"
-  s.version = "1.0.3"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["djcp"]
-  s.date = "2012-11-02"
+  s.authors = ["djcp", "fletcher91"]
+  s.date = "2012-12-10"
   s.description = "Linnaeus provides a redis-backed Bayesian classifier. Words are stemmed, stopwords are stopped, and redis is used to allow for persistent and concurrent training and classification."
   s.email = "dan@collispuro.net"
   s.extra_rdoc_files = [
