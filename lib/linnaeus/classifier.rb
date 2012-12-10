@@ -62,7 +62,7 @@ class Linnaeus::Classifier < Linnaeus
     scores = classification_scores(text)
     if scores.any?
       if @only_matched_words
-        scores.delete_if { |key, value| value < -10*count_word_occurrences(text).length }
+        scores.delete_if { |key, value| value >= Float::MAX || value == 0 || value < -10*count_word_occurrences(text).length }
         if scores.none?
           scores = { unknown: 1 }
         end
